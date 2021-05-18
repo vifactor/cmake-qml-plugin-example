@@ -6,7 +6,7 @@
 
 add_library(
     myplugin
-    SHARED
+    STATIC
 
     ${CMAKE_CURRENT_LIST_DIR}/myplugin.h
     ${CMAKE_CURRENT_LIST_DIR}/myquickitem.h
@@ -23,6 +23,7 @@ add_library(
 )
 
 set_target_properties(myplugin PROPERTIES AUTOMOC ON AUTORCC ON)
+target_compile_definitions(myplugin PUBLIC QT_STATICPLUGIN)
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     target_compile_options(
@@ -44,8 +45,8 @@ target_link_libraries(
 
 # During plugin searching Qt will be looking for 'qmldir' file
 # So we should place it next to our plugin lib.
-add_custom_command(
-    TARGET myplugin
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/qmldir $<TARGET_FILE_DIR:myplugin>/qmldir
-)
+#add_custom_command(
+#    TARGET myplugin
+#    POST_BUILD
+#    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/qmldir $<TARGET_FILE_DIR:myplugin>/qmldir
+#)

@@ -3,6 +3,9 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QtPlugin>
+
+Q_IMPORT_PLUGIN(MyPlugin)
 
 int main(int argc, char *argv[]) {
 #if defined(Q_OS_WIN)
