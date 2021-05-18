@@ -19,7 +19,7 @@ add_library(
     ${CMAKE_CURRENT_LIST_DIR}/qmldir
     ${CMAKE_CURRENT_LIST_DIR}/plugin.qmltypes
 
-    ${CMAKE_CURRENT_LIST_DIR}/plugin.qrc
+    ${CMAKE_CURRENT_LIST_DIR}/../../../plugin.qrc
 )
 
 set_target_properties(myplugin PROPERTIES AUTOMOC ON AUTORCC ON)

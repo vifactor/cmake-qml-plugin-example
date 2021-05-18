@@ -5,7 +5,6 @@ import Qt.labs.platform 1.0
 // Load our plugin from filesystem
 import my.plugin.example 1.0 as MyPlugin
 
-import "plugin/MyScript.js" as MyScript
 
 ApplicationWindow {
     visible: true
@@ -28,7 +27,7 @@ ApplicationWindow {
         anchors.horizontalCenter: pluginItem.horizontalCenter
         width: pluginItem.width
         onClicked: {
-            MyScript.onClicked(pluginItem);
+            MyPlugin.MyScript.onClicked(pluginItem);
         }
     }
 }

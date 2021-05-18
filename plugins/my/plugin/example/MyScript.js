@@ -10,5 +10,6 @@ function getRandomColor() {
 
 // Changes 'item' color
 function onClicked(item) {
+    console.log("Item: ", item);
     item.color = getRandomColor();
 }

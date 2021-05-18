@@ -1,6 +1,9 @@
 <RCC>
-    <qresource prefix="/plugin">
-        <file>MyQml.qml</file>
+    <qresource prefix="/my/plugin/example/plugin">
         <file>MyScript.js</file>
+        <file>MyQml.qml</file>
+    </qresource>
+    <qresource prefix="/my/plugin/example">
+        <file>qmldir</file>
     </qresource>
 </RCC>
