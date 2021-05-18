@@ -4,9 +4,6 @@
 # If you're goind to create reusable plugin make sure to build it as
 # separate project with proper install commands and CMake.config file.
 
-# 'myplugin' resource file. All files have 'plugin/' prefix
-qt5_add_resources(PLUGIN_RESOURCES ${CMAKE_CURRENT_LIST_DIR}/plugin.qrc)
-
 add_library(
     myplugin
     SHARED
@@ -22,18 +19,10 @@ add_library(
     ${CMAKE_CURRENT_LIST_DIR}/qmldir
     ${CMAKE_CURRENT_LIST_DIR}/plugin.qmltypes
 
-    ${PLUGIN_RESOURCES}     # Plugin resources file
+    ${CMAKE_CURRENT_LIST_DIR}/plugin.qrc
 )
 
-set(CMAKE_AUTOMOC ON)
-find_package(Qt5 REQUIRED COMPONENTS Quick Core Qml)
-
-target_compile_features(
-    myplugin
-    PRIVATE
-        cxx_auto_type
-        cxx_generic_lambdas
-)
+set_target_properties(myplugin PROPERTIES AUTOMOC ON AUTORCC ON)
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     target_compile_options(
@@ -58,8 +47,5 @@ target_link_libraries(
 add_custom_command(
     TARGET myplugin
     POST_BUILD
-    COMMAND
-        ${CMAKE_COMMAND} -E copy
-        ${CMAKE_CURRENT_LIST_DIR}/qmldir
-        $<TARGET_FILE_DIR:myplugin>/qmldir
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/qmldir $<TARGET_FILE_DIR:myplugin>/qmldir
 )
